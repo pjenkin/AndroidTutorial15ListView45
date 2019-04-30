@@ -26,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        String[] foods = {"Chips","Fish (battered)","Peas","Vinegar","Salt","Screeds"};
+        // simple form of list data, starting with plain strings - need to be turned into list items
+        // adapter to turn array members to list items
+
+
+
     }
 
     @Override

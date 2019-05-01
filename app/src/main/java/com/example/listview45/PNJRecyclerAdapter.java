@@ -3,6 +3,7 @@ package com.example.listview45;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -15,17 +16,9 @@ public class PNJRecyclerAdapter extends RecyclerView.Adapter<PNJRecyclerAdapter.
 {
     private String[] mDataset;
 
-    // reference to view(s) for each data item
-    public static class PNJViewHolder extends RecyclerView.ViewHolder
-    {
-        // where data items are: strings
-        public TextView textView;
-        public PNJViewHolder(TextView v)
-        {
-            super(v);       // in constructor - do what TextView d'do
-            textView = v;
-        }
-    }
+    // Listener pattern used: https://hackernoon.com/android-recyclerview-onitemclicklistener-getadapterposition-a-better-way-3c789baab4db
+    // setup listener
+    private View.OnClickListener mOnItemClickListener;  // NB capital case
 
     public PNJRecyclerAdapter(String[] pnjDataset)
     {
@@ -62,4 +55,27 @@ public class PNJRecyclerAdapter extends RecyclerView.Adapter<PNJRecyclerAdapter.
         return mDataset.length;
         // cf NumRows or similar in iOS/Swift
     }
+
+    public void setOnItemClickListener(View.OnClickListener itemClickListener)
+    {
+        mOnItemClickListener = itemClickListener;
+    }
+
+    // reference to view(s) for each data item
+    public class PNJViewHolder extends RecyclerView.ViewHolder
+    {
+        // where data items are: strings
+        public TextView textView;
+
+        public PNJViewHolder(TextView v)
+        {
+            super(v);       // in constructor - do what TextView d'do
+            textView = v;
+
+            // listener setup
+            v.setTag(this);
+            v.setOnClickListener(mOnItemClickListener);
+        }
+    }
+
 }

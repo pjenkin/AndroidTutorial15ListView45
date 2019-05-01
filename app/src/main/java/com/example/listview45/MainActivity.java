@@ -1,23 +1,16 @@
 package com.example.listview45;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +19,28 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private String[] foodData = {"Chips","Fish (battered)","Peas","Vinegar","Salt","Screeds",
+            "Tommy Tucker", "Reluctant Salad", "Pickled Onions", "Buttered Bread"};
+    // simple form of list data, starting with plain strings - need to be turned into list items
+    // adapter to turn array members to list items
+
+    // listener setup
+    View.OnClickListener onItemClickListener = new View.OnClickListener()
+    {
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        @Override
+        public void onClick(View v) {
+            PNJRecyclerAdapter.PNJViewHolder viewHolder = (PNJRecyclerAdapter.PNJViewHolder) v.getTag();
+            // tag was, in ViewHolder constructor, set to instance of the Adapter
+            int position = viewHolder.getAdapterPosition();     // get 'cursor' index of where clicked
+            Toast.makeText(MainActivity.this, "You clicked on: " + foodData[position], Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        String[] foods = {"Chips","Fish (battered)","Peas","Vinegar","Salt","Screeds",
-                "Tommy Tucker", "Reluctant Salad", "Pickled Onions", "Buttered Bread"};
-        // simple form of list data, starting with plain strings - need to be turned into list items
-        // adapter to turn array members to list items
+//        String[] foods = {"Chips","Fish (battered)","Peas","Vinegar","Salt","Screeds",
+//                "Tommy Tucker", "Reluctant Salad", "Pickled Onions", "Buttered Bread"};
+//        // simple form of list data, starting with plain strings - need to be turned into list items
+//        // adapter to turn array members to list items
 
         recyclerView = (RecyclerView) findViewById(R.id.pnjRecyclerView);
 
@@ -59,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter
-        mAdapter = new PNJRecyclerAdapter(foods);       // specify also a set of data
+        PNJRecyclerAdapter mAdapter = new PNJRecyclerAdapter(foodData);       // specify also a set of data
         recyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(onItemClickListener);
 
     }
 

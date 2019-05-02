@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     // simple form of list data, starting with plain strings - need to be turned into list items
     // adapter to turn array members to list items
 
-    // listener setup
+    // listener setup (4)
     View.OnClickListener onItemClickListener = new View.OnClickListener()
     {
         /**
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         PNJRecyclerAdapter mAdapter = new PNJRecyclerAdapter(foodData);       // specify also a set of data
         recyclerView.setAdapter(mAdapter);
 
+        // listener setup (5)
         mAdapter.setOnItemClickListener(onItemClickListener);
 
     }

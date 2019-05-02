@@ -15,16 +15,21 @@ import android.widget.TextView;
 
 public class PNJRecyclerAdapter extends RecyclerView.Adapter<PNJRecyclerAdapter.PNJViewHolder>
 {
-    private String[] mDataset;
+//    private String[] mDataset;
+    private PNJRowItem[] mDataset;
 
     // Listener pattern used: https://hackernoon.com/android-recyclerview-onitemclicklistener-getadapterposition-a-better-way-3c789baab4db
     // setup listener (1)
     private View.OnClickListener mOnItemClickListener;  // NB capital case
 
-    public PNJRecyclerAdapter(String[] pnjDataset)
+    public PNJRecyclerAdapter(PNJRowItem[] pnjDataset)
     {
         mDataset = pnjDataset;
     }
+//    public PNJRecyclerAdapter(String[] pnjDataset)
+//    {
+//        mDataset = pnjDataset;
+//    }
 
     // for news views (this invoked by the layout manager in code)
     // Alt+Insert + overrides...
@@ -50,11 +55,13 @@ public class PNJRecyclerAdapter extends RecyclerView.Adapter<PNJRecyclerAdapter.
         //super.onBindViewHolder(holder, position, payloads);
 //        holder.textView.setText(mDataset[position]);
         ImageView custom_row_imageview = (ImageView) holder.view.findViewById(R.id.custom_row_imageview);
-        custom_row_imageview.setImageResource(R.drawable.wave_ship_boat_wallpaper);
+//        custom_row_imageview.setImageResource(R.drawable.wave_ship_boat_wallpaper);
+        custom_row_imageview.setImageResource(mDataset[position].getImageID());
 
 
         TextView custom_row_text = (TextView) holder.view.findViewById(R.id.custom_row_text);
-        custom_row_text.setText(mDataset[position]);
+//        custom_row_text.setText(mDataset[position]);
+        custom_row_text.setText(mDataset[position].getText());
         // cf cellForRowAt in iOS/Swift
     }
 

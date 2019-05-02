@@ -25,6 +25,23 @@ public class MainActivity extends AppCompatActivity {
     // simple form of list data, starting with plain strings - need to be turned into list items
     // adapter to turn array members to list items
 
+//    private PNJRowItem[] foodItems = {"Chips","Fish (battered)","Mushy Peas","Vinegar","Salt","Screeds",
+//            "Tommy Tucker", "Reluctant Salad", "Pickled Onions", "Buttered Bread"};
+
+    private PNJRowItem[] foodItems = {new PNJRowItem("Chips",R.drawable.chips),
+            new PNJRowItem("Chips",R.drawable.wave_ship_boat_wallpaper),
+            new PNJRowItem("Fish (battered)",R.drawable.fish_battered),
+            new PNJRowItem("Mushy Peas",R.drawable.mushy_peas),
+            new PNJRowItem("Vinegar",R.drawable.vinegar),
+            new PNJRowItem("Salt",R.drawable.salt),
+            new PNJRowItem("Reluctant Salad",R.drawable.reluctant_salad),
+            new PNJRowItem("Pickled Onions",R.drawable.pickled_onions),
+            new PNJRowItem("Buttered Breads",R.drawable.buttered_bread),
+            new PNJRowItem("Screeds",R.drawable.screeds),
+            new PNJRowItem("Tommy Tucker",R.drawable.tommy_tucker)
+            };
+
+
     // listener setup (4)
     View.OnClickListener onItemClickListener = new View.OnClickListener()
     {
@@ -38,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
             PNJRecyclerAdapter.PNJViewHolder viewHolder = (PNJRecyclerAdapter.PNJViewHolder) v.getTag();
             // tag was, in ViewHolder constructor, set to instance of the Adapter
             int position = viewHolder.getAdapterPosition();     // get 'cursor' index of where clicked
-            Toast.makeText(MainActivity.this, "You clicked on: " + foodData[position], Toast.LENGTH_LONG).show();
+//            Toast.makeText(MainActivity.this, "You clicked on: " + foodData[position], Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "You clicked on: " + foodItems[position].getText(), Toast.LENGTH_LONG).show();
         }
     };
 
@@ -74,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter
-        PNJRecyclerAdapter mAdapter = new PNJRecyclerAdapter(foodData);       // specify also a set of data
+//        PNJRecyclerAdapter mAdapter = new PNJRecyclerAdapter(foodData);       // specify also a set of data
+        PNJRecyclerAdapter mAdapter = new PNJRecyclerAdapter(foodItems);       // specify also a set of data
         recyclerView.setAdapter(mAdapter);
 
         // listener setup (5)
